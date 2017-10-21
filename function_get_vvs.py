@@ -7,7 +7,7 @@ import os
 import requests
 import threading
 import datetime
-
+import lcddriver
 
 # In[21]:
 
@@ -32,6 +32,7 @@ def get_vvs_data():
 
 
 def update_display_vvs(U14,U13):
+    lcd = lcddriver.lcd()
     now = datetime.datetime.now()
     Minute_now = now.hour*60+now.minute+now.second/60
 
