@@ -52,11 +52,11 @@ def update_display_vvs(U14,U13):
         seconds_U13 = '0' + str(seconds_U13)
 
     U13_display_string = 'U13: '+str(int(U13_minute_next//1))+':'+ seconds_U13
-    threading.Timer(5, get_vvs_data).start()
+    
     print(U14_display_string)
     print(U13_display_string)
     lcd.lcd_display_string(U14_display_string+'   '+U13_display_string, 1)
-    
+    threading.Timer(5, update_display_vvs).start()
 
 
 

@@ -10,6 +10,7 @@ import sched
 import threading
 from function_get_vvs import *
 import lcddriver
+import datetime
 
 lcd = lcddriver.lcd()
 
