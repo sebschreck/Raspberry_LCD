@@ -16,7 +16,7 @@ lcd = lcddriver.lcd()
 
 U13,U14 = get_vvs_data()
 
-update_display_vvs(U14,U13)
+update_display_vvs(U14,U13,lcd)
 
 
 
