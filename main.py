@@ -14,7 +14,7 @@ import datetime
 
 lcd = lcddriver.lcd()
 
-U13,U14 = get_vvs_data()
+U14,U13 = get_vvs_data()
 
 update_display_vvs(U14,U13,lcd)
 

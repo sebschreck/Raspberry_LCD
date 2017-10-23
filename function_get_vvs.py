@@ -2,12 +2,13 @@
 # coding: utf-8
 
 # In[22]:
-
+from __future__ import division
 import os
 import requests
 import threading
 import datetime
 import lcddriver
+
 
 # In[21]:
 
@@ -28,25 +29,27 @@ def get_vvs_data():
         if (Hedelfingen_counter==2 & Heslach_counter==2):
             break
     threading.Timer(60, get_vvs_data).start()
-    print('abfrage')
+    #print('abfrage')
     return Heslach_abfahrten, Hedelfingen_abfahrten
 
 
 def update_display_vvs(U14,U13,lcd):
     now = datetime.datetime.now()
     Minute_now = now.hour*60+now.minute+now.second/60
-
+    #print (Minute_now)
     U14_minute_next = (int(U14[0][0]['hour'])*60+int(U14[0][0]['minute'])+int(U14[0][1])-Minute_now)
     U13_minute_next = (int(U13[0][0]['hour'])*60+int(U13[0][0]['minute'])+int(U13[0][1])-Minute_now)
     if U14_minute_next<=4:
         U14_minute_next = (int(U14[1][0]['hour'])*60+int(U14[1][0]['minute'])+int(U14[1][1])-Minute_now) 
     if U13_minute_next<=4:
         U13_minute_next = (int(U13[1][0]['hour'])*60+int(U13[1][0]['minute'])+int(U13[1][1])-Minute_now) 
-
+    #print (now)
+    #print(U14_minute_next)
     seconds_U14 = str((int(U14_minute_next%1*60)))
+    #print(seconds_U14)
     if len(seconds_U14)==1:
         seconds_U14 = '0' + str(seconds_U14)
-
+	
     U14_display_string = 'U14 '+str(int(U14_minute_next//1))+':'+ seconds_U14
 
     seconds_U13 = str((int(U13_minute_next%1*60)))
@@ -54,9 +57,9 @@ def update_display_vvs(U14,U13,lcd):
         seconds_U13 = '0' + str(seconds_U13)
 
     U13_display_string = 'U13 '+str(int(U13_minute_next//1))+':'+ seconds_U13
-    print(datetime.datetime.now())
-    print(U14_display_string)
-    print(U13_display_string)
+    #print(datetime.datetime.now())
+    #print(U14_display_string)
+    #print(U13_display_string)
     lcd.lcd_display_string(U14_display_string+' '+U13_display_string, 1)
     threading.Timer(4, update_display_vvs, [U14,U13,lcd]).start()
 
