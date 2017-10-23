@@ -7,7 +7,7 @@ import os
 import requests
 import threading
 import datetime
-import lcddriver
+#import lcddriver
 
 # In[21]:
 
@@ -28,11 +28,12 @@ def get_vvs_data():
         if (Hedelfingen_counter==2 & Heslach_counter==2):
             break
     threading.Timer(60, get_vvs_data).start()
+    print(datetime.datetime.now())
     return Heslach_abfahrten, Hedelfingen_abfahrten
 
 
 def update_display_vvs(U14,U13):
-    lcd = lcddriver.lcd()
+    #lcd = lcddriver.lcd()
     now = datetime.datetime.now()
     Minute_now = now.hour*60+now.minute+now.second/60
 
@@ -47,18 +48,18 @@ def update_display_vvs(U14,U13):
     if len(seconds_U14)==1:
         seconds_U14 = '0' + str(seconds_U14)
 
-    U14_display_string = 'U14: '+str(int(U14_minute_next//1))+':'+ seconds_U14
+    U14_display_string = 'U14 '+str(int(U14_minute_next//1))+':'+ seconds_U14
 
     seconds_U13 = str((int(U13_minute_next%1*60)))
     if len(seconds_U13)==1:
         seconds_U13 = '0' + str(seconds_U13)
 
-    U13_display_string = 'U13: '+str(int(U13_minute_next//1))+':'+ seconds_U13
-    
-    print(U14_display_string)
-    print(U13_display_string)
-    lcd.lcd_display_string(U14_display_string+'   '+U13_display_string, 1)
-    threading.Timer(5, update_display_vvs(U14,U13)).start()
+    U13_display_string = 'U13 '+str(int(U13_minute_next//1))+':'+ seconds_U13
+    #print(datetime.datetime.now())
+    #print(U14_display_string)
+    #print(U13_display_string)
+    lcd.lcd_display_string(U14_display_string+' '+U13_display_string, 1)
+    threading.Timer(4, update_display_vvs, [U14,U13]).start()
 
 
 
