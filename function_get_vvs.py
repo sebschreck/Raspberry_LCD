@@ -7,7 +7,7 @@ import os
 import requests
 import threading
 import datetime
-#import lcddriver
+import lcddriver
 
 # In[21]:
 
@@ -32,8 +32,7 @@ def get_vvs_data():
     return Heslach_abfahrten, Hedelfingen_abfahrten
 
 
-def update_display_vvs(U14,U13):
-    #lcd = lcddriver.lcd()
+def update_display_vvs(U14,U13,lcd):
     now = datetime.datetime.now()
     Minute_now = now.hour*60+now.minute+now.second/60
 
@@ -59,7 +58,7 @@ def update_display_vvs(U14,U13):
     #print(U14_display_string)
     #print(U13_display_string)
     lcd.lcd_display_string(U14_display_string+' '+U13_display_string, 1)
-    threading.Timer(4, update_display_vvs, [U14,U13]).start()
+    threading.Timer(4, update_display_vvs, [U14,U13,lcd]).start()
 
 
 
