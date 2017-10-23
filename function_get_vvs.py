@@ -28,7 +28,7 @@ def get_vvs_data():
         if (Hedelfingen_counter==2 & Heslach_counter==2):
             break
     threading.Timer(60, get_vvs_data).start()
-    print(datetime.datetime.now())
+    #print(datetime.datetime.now())
     return Heslach_abfahrten, Hedelfingen_abfahrten
 
 
